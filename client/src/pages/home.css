@@ -1,0 +1,184 @@
+img{
+    width: 100vw;
+    height: 50vh;
+    object-fit: cover;
+    filter: brightness(1.2) saturate(1.1);
+}
+.callus ul li:hover{
+    color: rgb(237, 34, 102);
+}
+.callus ul{
+    justify-content: center;
+    display: flex;
+    gap:20%;
+    
+    li{
+        list-style: none;
+        font-size: 15px;
+
+    }
+}
+.i-phone{
+    display: flex;
+    align-items: center;
+    font-size: 10px;
+}
+.cart{
+    display: flex;
+    align-items: center;
+    font-size: 10px;
+
+}
+.cart:hover{
+    color: rgb(237, 34, 102);
+}
+.Flowers-Boutique{
+    color: rgb(249, 158, 173);
+    font-size: 30px;
+}
+.numP{
+    color: pink;
+}
+.info{
+    display: flex;
+    gap:10%;
+    justify-content: center;
+    background-color: rgba(248, 181, 194, 0.753);
+    padding: 15px;
+    color: rgb(255, 255, 255);
+    font-size: 15px;
+    
+}
+.info b:hover{
+    color: palevioletred;
+}
+
+.USD{
+    color: pink;
+}
+.most{
+    /* color: pink; */
+    display: flex;
+    justify-content: center;
+}
+.icon-flower{
+    display: flex;
+    justify-content: center;
+    font-size: 40px;
+    white-space: nowrap;
+    align-items: center;
+}
+.icon-flower::before,
+.icon-flower::after {
+  content: "";
+  flex-grow: 1;
+  height: 2px;
+  background-color: #f8a2db;
+  margin: 0 10px;
+}
+.item-flower{
+    width: fit-content;
+    height: fit-content;
+    text-align: center;
+    padding: 5px;
+    border-radius: 10px;
+    /* display: flex;
+    gap: 20px; */
+    ul{
+      /* display: flex;   */
+    }
+    
+    /* border: 1px solid black; */
+    box-shadow: 0 2px 9px rgba(241, 154, 222, 0.8);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    li{
+        list-style: none;
+    }
+    
+}
+.img-prd img{
+    width: 200px;
+    height: 150px;
+    border-radius: 10px;
+}
+*{
+    padding: 1px;
+}
+.name-price{
+    display: flex;
+    gap: 10px;
+}
+li button{
+    color: white;
+    background-color: pink;
+    border: none;
+    width: 100px;
+    height: 40px;
+    border-radius: 10px;
+
+}
+li button:hover{
+    background-color: white;
+    color: pink;
+    border: none;
+}
+.cl-price{
+    color: rgb(237, 123, 169);
+}
+.button-buy{
+    display: flex;
+    gap: 5px ;
+}
+.render{
+    
+    display: flex;
+    gap: 50px;
+    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    justify-items: center;
+}
+.img-end{
+    height: 500px;
+}
+h2{
+    font-size: 35px;
+    color: palevioletred;
+}
+.we-flower{
+    background-image: url(https://i.pinimg.com/originals/7f/50/5a/7f505a132f7886bdb59c06ffbbeb50aa.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    text-align: center;
+    padding: 70px;
+    /* filter: sepia(0.1) hue-rotate(2deg) brightness(0.9); */
+}
+.we{
+    color: #f399d5;
+    /* text-shadow: x-offset y-offset blur-radius color black; */
+    text-shadow: -1px -3px 1px #000;
+}
+.TrangFlower{
+    display: flex;
+    gap:10%;
+    padding:40px;
+    justify-content: center;
+    /* align-items: center; */
+    background-color: #f6ddeecc;
+    p:hover{
+        color:palevioletred;
+    }
+}
+
+.lg-su .login-sigup{
+    width: 160px;
+    height: 30px;
+    /* margin: 10px; */
+    /* margin-left:     80px; */
+   
+}
+/* .lg-su{
+    display: flex;
+    
+} */

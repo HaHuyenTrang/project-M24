@@ -1,0 +1,84 @@
+{
+    "products":[
+        {
+            "id":1,
+            "name":"Cẩm tú cầu",
+            "price":20000,
+            "expression":"bông",
+            "describe":"tượng trưng cho vẻ đẹp mĩ miều",
+            "img":"https://s1.1zoom.me/big0/987/Hydrangea_Light_Blue_506182.jpg"
+        },
+        {
+            "id":2,
+            "name":"Hoa Hồng",
+            "price":300000,
+            "expression":"bó",
+            "describe":"tượng trưng cho vẻ đẹp mĩ miều",
+            "img":"https://hoatuoi360.vn/uploads/file/hinh-anh-hoa-hong-dep-1.jpg"
+        },
+        {
+            "id":3,
+            "name":"Hoa cúc",
+            "price":450000,
+            "expression":"bó",
+            "describe":"tượng trưng cho vẻ đẹp mĩ miều",
+            "img":"https://img6.thuthuatphanmem.vn/uploads/2022/04/16/anh-bo-hoa-cuc-hoa-mi-nhieu-mau_022834616.jpg"
+        },
+        {
+            "id":4,
+            "name":"Hoa tulip",
+            "price":45000,
+            "expression":"bông",
+            "describe":"tượng trưng cho vẻ đẹp mĩ miều",
+            "img":"https://cf.ltkcdn.net/garden/images/orig/291613-1600x1066-meaning-different-color-tulip.jpg"
+        },
+        {
+            "id":5,
+            "name":"Hoa hướng dương",
+            "price":500000,
+            "expression":"bó",
+            "describe":"tượng trưng cho vẻ đẹp mĩ miều",
+            "img":"https://i.pinimg.com/originals/51/94/75/51947510ebb2379e2aec60e580a21237.jpg"
+        },
+        {
+            "id":6,
+            "name":"Hoa lan",
+            "price":300000,
+            "expression":"bó",
+            "describe":"tượng trưng cho vẻ đẹp mĩ miều",
+            "img":"https://th.bing.com/th/id/OIP.1Ge95dy85jSACr6fUFPx3AHaEW?rs=1&pid=ImgDetMain"
+        },
+        {
+            "id":7,
+            "name":"Hoa mix",
+            "price":800000,
+            "expression":"bó",
+            "describe":"tượng trưng cho vẻ đẹp mĩ miều",
+            "img":"https://hoatuoihoamy.com/wp-content/uploads/2022/10/Hinh-41.jpg"
+        },
+        {
+            "id":8,
+            "name":"Hoa sen ",
+            "price":390000,
+            "expression":"bó",
+            "describe":"tượng trưng cho vẻ đẹp mĩ miều",
+            "img":"https://alo.flowers/wp-content/uploads/2021/08/hoa-sen-bo.jpg"
+        }
+    ],
+    "users": [
+        {
+            "id": 1,
+            "userName": "Trang2005",
+            "email": "trang2005@gmail.com",
+            "password": "trang2005",
+            "confirmPassword": "trang2005"
+        },
+        {
+            "id": 2,
+            "userName": "quynh2005",
+            "email": "quynh2005@gmail.com",
+            "password": "quynh2005",
+            "confirmPassword": "trang2005"
+        }
+    ]
+}
