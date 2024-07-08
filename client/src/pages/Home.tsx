@@ -2,14 +2,21 @@ import { useEffect } from 'react'
 import "./home.css"
 import { useDispatch, useSelector } from 'react-redux'
 import { getAllProduct } from '../store/reducer/productReducer'
+import { useNavigate } from 'react-router-dom'
 
 
 export default function Home() {
   const flower: any = useSelector(((state: any) => state.productReducer.list))
+  const navigate = useNavigate()
   const disPatch = useDispatch();
   useEffect(() => {
     disPatch(getAllProduct())
   }, [])
+
+  const handleDetail = (id: number) => {
+    console.log(id);
+    navigate(`/detail/${id}`)
+  }
 
   return (
     <div className='home'>
@@ -36,12 +43,12 @@ export default function Home() {
             </div>
           </li>
         </ul>
-        
+
       </div>
-     
+
       <div className='lg-su'>
-         <a href="/login"><button className='login-sigup'>Đăng nhập/ Đăng kí</button></a>
-        
+        <a href="/login"><button className='login-sigup'>Đăng nhập/ Đăng kí</button></a>
+
       </div>
 
       <br />
@@ -71,7 +78,7 @@ export default function Home() {
             </li>
             <li>Hình thức: {item.expression}</li>
             <div className='button-buy'>
-              <li><button>Xem chi tiết</button></li>
+              <li><button onClick={() => handleDetail(item.id)}>Xem chi tiết</button></li>
               <li><button>Mua hoa</button></li>
             </div>
             <li>{item.describe}</li>

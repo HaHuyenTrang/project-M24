@@ -2,7 +2,7 @@ import "../assets/login.css"
 import { useEffect, useState } from "react";
 import { Users } from "../interface/user";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllUser } from "../store/reducer/userReducer";
+import { addUser, getAllUser } from "../store/reducer/userReducer";
 
 function validateEmail(email: any) {
     return String(email)
@@ -36,8 +36,18 @@ export default function Login_register() {
         confirmPassword: ""
     })
 
+    const resetData = () => {
+        setInputValue({
+            id: 0,
+            userName: "",
+            email: "",
+            password: "",
+            confirmPassword: "",
+        })
+    }
+
     // Hàm đăng kí
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         // Ngăn chặn load trang
         e.preventDefault();
 
@@ -56,8 +66,8 @@ export default function Login_register() {
         } else if (!validateEmail(inputValue.email)) {
             error.email = "Email không đúng định dạng";
             valid = false;
-        } else if (userState.some((item: any) => item.email !== inputValue.email)) {
-            error.email = "Emai đã tồn tại";
+        } else if (userState.some((item: any) => item.email === inputValue.email)) {
+            error.email = "Email đã tồn tại";
             valid = false;
         } else {
             error.email = ""
@@ -81,6 +91,18 @@ export default function Login_register() {
         }
 
         setError({ ...error })
+
+        if (valid) {
+            const newUser = {
+                userName: inputValue.userName,
+                email: inputValue.email,
+                password: inputValue.password,
+                confirmPassword: inputValue.confirmPassword
+            }
+            await dispatch(addUser(newUser))
+            await dispatch(getAllUser());
+            resetData()
+        }
     }
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -92,7 +114,7 @@ export default function Login_register() {
     }
 
     return (
-        <div  className="main" style={{ backgroundColor: "pink", margin: "0 auto", marginTop: 40 }}>
+        <div className="main" style={{ backgroundColor: "pink", margin: "0 auto", marginTop: 40 }}>
             <input type="checkbox" id="chk" aria-hidden="true" />
             <div className="signup">
                 <form onSubmit={handleSubmit}>
@@ -101,19 +123,19 @@ export default function Login_register() {
                     </label>
                     <input style={{ backgroundColor: "white" }} type="text" name="userName" placeholder="Tên" onChange={handleChange} value={inputValue.userName} />
                     {
-                        error.userName && <span style={{ color: "red", fontSize: 12, margin:75 }}>{error.userName}</span>
+                        error.userName && <span style={{ color: "red", fontSize: 12, margin: 75 }}>{error.userName}</span>
                     }
                     <input style={{ backgroundColor: "white" }} type="email" name="email" placeholder="Gmail" onChange={handleChange} value={inputValue.email} />
                     {
-                        error.email && <span style={{ color: "red", fontSize: 12, margin:75  }}>{error.email}</span>
+                        error.email && <span style={{ color: "red", fontSize: 12, margin: 75 }}>{error.email}</span>
                     }
                     <input style={{ backgroundColor: "white" }} type="password" name="password" placeholder="Mật khẩu" onChange={handleChange} value={inputValue.password} />
                     {
-                        error.password && <span style={{ color: "red", fontSize: 12, margin:75  }}>{error.password}</span>
+                        error.password && <span style={{ color: "red", fontSize: 12, margin: 75 }}>{error.password}</span>
                     }
                     <input style={{ backgroundColor: "white" }} type="password" name="confirmPassword" placeholder="Mật khẩu" onChange={handleChange} value={inputValue.confirmPassword} />
                     {
-                        error.confirmPassword && <span style={{ color: "red", fontSize: 12, margin:75  }}>{error.confirmPassword}</span>
+                        error.confirmPassword && <span style={{ color: "red", fontSize: 12, margin: 75 }}>{error.confirmPassword}</span>
                     }
 
                     <button>Đăng kí</button>

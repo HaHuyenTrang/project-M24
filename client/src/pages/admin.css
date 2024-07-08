@@ -214,6 +214,7 @@ body {
   display: flex;
   align-items: center;
   height: 36px;
+
 }
 #content nav form .form-input input {
   flex-grow: 1;
@@ -521,6 +522,7 @@ body {
     background: transparent;
     border-radius: none;
     color: var(--dark);
+    
   }
 
   #content nav form.show .form-input input {
