@@ -57,7 +57,7 @@ button {
 }
 button:hover {
   background: #fefefe;
-  color:#f81090f0 ;
+  color: #f81090f0;
 }
 .login {
   height: 460px;
@@ -72,7 +72,7 @@ button:hover {
 }
 
 #chk:checked ~ .login {
-  transform: translateY(-500px);
+  transform: translateY(-600px);
 }
 #chk:checked ~ .login label {
   transform: scale(1);
@@ -80,8 +80,7 @@ button:hover {
 #chk:checked ~ .signup label {
   transform: scale(0.6);
 }
-*{
-}
+
 /* body{
     background-image: url("https://images.fineartamerica.com/images/artworkimages/mediumlarge/3/tulipa-light-and-dreamy-2-jenny-rainbow.jpg");
     background-size: cover;
@@ -93,4 +92,3 @@ button:hover {
     
     
 } */
-

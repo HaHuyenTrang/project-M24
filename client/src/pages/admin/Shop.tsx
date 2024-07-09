@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import './admin.css'
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllProduct } from '../store/reducer/productReducer';
+import { getAllProduct } from '../../store/reducer/productReducer';
 // import './admin'
 
 export default function Shop() {
@@ -77,7 +77,7 @@ export default function Shop() {
                 <form action="#">
                     <div className="form-input">
                         <input type="search" placeholder="Tìm kiếm..." />
-                        <button type="submit" className="search-btn">
+                        <button type="submit" className="search-btn" style={{ margin: 0 }}>
                             <i className="bx bx-search" />
                         </button>
                     </div>
@@ -153,18 +153,20 @@ export default function Shop() {
                             <thead>
                                 <tr>
                                     <th>Tên sản phẩm</th>
-                                    <th>Thành tiền</th>
+                                    <th>Giá trị sản phẩm</th>
                                     <th>Hình thức</th>
                                     <th>Ảnh</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {flower.map((item: any, index: any) => {
-                                    return <tr className='item-flower' key={item.id}>
+                                {flower.map((item: any) => {
+                                    return <tr className='item-flower' key={item.id}  >
                                         <td>{item.name}</td>
-                                        <td><b className='cl-price'>{item.price.toLocaleString('it-IT', { style: 'currency', currency: 'VND' })}</b></td>
-                                        <td>{item.expression}</td>
-                                        <td><img src={item.img} alt="" /></td>
+                                        <td
+                                            style={{ textAlign: "start" }}
+                                        ><b className='cl-price'>{item.price.toLocaleString('it-IT', { style: 'currency', currency: 'VND' })}</b></td>
+                                        <td style={{ textAlign: "start" }}>{item.expression}</td>
+                                        <td style={{ textAlign: "start" }}><img src={item.img} alt="" /></td>
 
                                     </tr>
                                 })}

@@ -21,7 +21,7 @@
       "name": "Hoa cúc",
       "price": 450000,
       "expression": "bó",
-      "describe": "tượng trưng cho vẻ đẹp mĩ miều",
+      "describe": "Hoa Cúc: Thể hiện tình yêu, sự cao thượng",
       "img": "https://img6.thuthuatphanmem.vn/uploads/2022/04/16/anh-bo-hoa-cuc-hoa-mi-nhieu-mau_022834616.jpg"
     },
     {
@@ -86,6 +86,13 @@
       "password": "hoang2005",
       "confirmPassword": "hoang2005",
       "id": 3
+    },
+    {
+      "userName": "Chang",
+      "email": "Chang091221@gmail.com",
+      "password": "chang091221",
+      "confirmPassword": "chang091221",
+      "id": 4
     }
   ]
 }

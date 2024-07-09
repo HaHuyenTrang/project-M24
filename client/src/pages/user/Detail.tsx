@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import "./home.css"
 import { useDispatch, useSelector } from 'react-redux'
-import { getAllProduct } from '../store/reducer/productReducer'
+import { getAllProduct } from '../../store/reducer/productReducer'
 import { useParams } from 'react-router-dom'
 
 
@@ -14,8 +14,8 @@ export default function Detail() {
         dispatch(getAllProduct());
     }, [dispatch]);
 
-    const product = flower.find((item: any) => item.id === id);
-
+    const product = flower.find((item: any) => item.id.toString() === id);
+    console.log(product)
 
     return (
         <div className='home'>
@@ -45,15 +45,7 @@ export default function Detail() {
 
             </div>
 
-            <div className='lg-su'>
-                <a href="/login"><button className='login-sigup'>Đăng nhập/ Đăng kí</button></a>
-
-            </div>
-
-            <br />
-            <br />
-            <br />
-
+            
             <div className='info'>
                 <b>Trang chủ</b>
                 <b>Tất cả sản phẩm</b>
@@ -62,24 +54,32 @@ export default function Detail() {
             </div>
             <br />
             <br />
-            <h2 className='most'>Nổi Bật</h2>
-            <b className='icon-flower'>💐🌸</b>
-            <br />
-            <div className='render' >
-                <ul className='item-flower' key={product.id}>
-                    <li className='img-prd'><img src={product.img} alt="" /></li>
+           
+            <div className='render' style={{display:"flex"}} >
+                <ul className='item-flower' key={product.id} style={{width:"800px",height:"600px"}} >
+                    <li className='img-prd' >< img src={product.img} style={{width:"600px",height:"400px"}} alt="" /></li>
                     {/* <li>{index+1}</li> */}
-                    <li><b>{product.name}</b></li>
+                    <li><b style={{fontSize:"30px"}}>{product.name}</b></li>
                     <li >
-                        <b className='cl-price'>{product.price.toLocaleString('it-IT', { style: 'currency', currency: 'VND' })}</b>
+                        <b style={{fontSize:"25px"}} className='cl-price'>{product.price.toLocaleString('it-IT', { style: 'currency', currency: 'VND' })}</b>
                     </li>
-                    <li>Hình thức: {product.expression}</li>
-                    <div className='button-buy'>
+                    <li >Hình thức: {product.expression}</li>
+                    <div className='button-buy' style={{display:"flex", justifyContent:"center"}}>
                         {/* <li><button onClick={handleDetail}>Xem chi tiết</button></li> */}
-                        <li><button>Mua hoa</button></li>
+                        <li><button >Mua hoa</button></li>
                     </div>
-                    <li>{product.describe}</li>
+                    {/* <li>{product.describe}</li> */}
                 </ul>
+                <ul style={{fontSize:"20px", backgroundColor:""}}>
+                    <h3 >Mô tả</h3>
+                Hoa là món quà quý giá mà thiên nhiên ban tặng cho con người. Ngoài việc làm đẹp cho cuộc sống, mỗi loài hoa còn mang trong mình ý nghĩa sâu sắc, giúp con người truyền đạt những thông điệp trong tình yêu và cuộc sống
+                <br />
+                <br />
+                Các loài hoa mang theo mình ý nghĩa sâu sắc, chính là một ngôn ngữ tuyệt vời mà chúng muốn gửi đến cuộc sống. Mỗi bông hoa đều như những nét vẽ tuyệt đẹp, tô thêm màu sắc cho hành trình sống của chúng ta. 
+                
+                
+                </ul>
+                
 
             </div>
             <br />

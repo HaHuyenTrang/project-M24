@@ -5,3 +5,8 @@ export interface Users{
     password: string,
     confirmPassword: string,
 }
+
+export interface Account{
+    email: string,
+    password: string,
+}

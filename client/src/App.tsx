@@ -1,11 +1,11 @@
 
-import Home from './pages/Home'
-import AdminFlower from './pages/AdminFlower'
+import Home from './pages/user/Home' 
+import AdminFlower from './pages/admin/AdminFlower'
 
 import { Route, Routes } from 'react-router-dom'
-import Login_register from './pages/Login_register'
-import Shop from './pages/Shop'
-import Detail from './pages/Detail'
+import Login_register from './pages/user/Login_register' 
+import Shop from './pages/admin/Shop' 
+import Detail from './pages/user/Detail' 
 
 export default function App() {
   return (

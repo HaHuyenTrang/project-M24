@@ -1,11 +1,13 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import "./home.css"
 import { useDispatch, useSelector } from 'react-redux'
-import { getAllProduct } from '../store/reducer/productReducer'
+import { getAllProduct } from '../../store/reducer/productReducer'
 import { useNavigate } from 'react-router-dom'
 
 
 export default function Home() {
+  const [account, setAccount] = useState(JSON.parse(localStorage.getItem("account") || "null"));
+
   const flower: any = useSelector(((state: any) => state.productReducer.list))
   const navigate = useNavigate()
   const disPatch = useDispatch();
@@ -16,6 +18,15 @@ export default function Home() {
   const handleDetail = (id: number) => {
     console.log(id);
     navigate(`/detail/${id}`)
+  }
+
+  const handleLogout = () => {
+    const confirmLogOut = confirm("Bạn có chắc chắn muốn đăng xuất không?");
+    if (confirmLogOut) {
+      localStorage.removeItem("account");
+      navigate("/login")
+      setAccount(null)
+    }
   }
 
   return (
@@ -47,7 +58,14 @@ export default function Home() {
       </div>
 
       <div className='lg-su'>
-        <a href="/login"><button className='login-sigup'>Đăng nhập/ Đăng kí</button></a>
+        {
+          account ? <>
+            <p>{account.userName}</p>
+            <a href="/login" onClick={handleLogout}><button className='login-sigup'>Đăng xuất</button></a>
+          </> : <>
+            <a href="/login"><button className='login-sigup'>Đăng nhập/ Đăng kí</button></a>
+          </>
+        }
 
       </div>
 

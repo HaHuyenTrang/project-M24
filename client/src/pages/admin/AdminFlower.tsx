@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import './admin.css'
 import { useDispatch, useSelector } from 'react-redux'
-import { getAllUser } from '../store/reducer/userReducer'
+import { getAllUser } from '../../store/reducer/userReducer' 
 export default function Admin1() {
   const users = useSelector((state: any) => state.userReducer.user)
   console.log(users);

@@ -1,8 +1,9 @@
-import "../assets/login.css"
+import "../../assets/login.css"
 import { useEffect, useState } from "react";
-import { Users } from "../interface/user";
+import { Account, Users } from "../../interface/user";
 import { useDispatch, useSelector } from "react-redux";
-import { addUser, getAllUser } from "../store/reducer/userReducer";
+import { addUser, getAllUser } from "../../store/reducer/userReducer";
+import { useNavigate } from "react-router-dom";
 
 function validateEmail(email: any) {
     return String(email)
@@ -14,12 +15,11 @@ function validateEmail(email: any) {
 
 export default function Login_register() {
     const userState = useSelector((state: any) => state.userReducer.user);
-    console.log(userState)
-    const dispatch = useDispatch()
-    useEffect(() => {
-        dispatch(getAllUser())
-    }, [])
-    const [isActive, setIsActive] = useState(false);
+    const dispatch = useDispatch();
+    const navigate = useNavigate()
+
+    const [isLogin, setIsLogin] = useState(true);
+
     const [inputValue, setInputValue] = useState<Users>({
         id: Math.ceil(Math.random() * 10000),
         userName: "",
@@ -34,6 +34,16 @@ export default function Login_register() {
         email: "",
         password: "",
         confirmPassword: ""
+    })
+
+    const [account, setAccount] = useState<Account>({
+        email: "",
+        password: "",
+    })
+
+    const [errorAccount, setErrorAccount] = useState({
+        email: "",
+        password: "",
     })
 
     const resetData = () => {
@@ -113,12 +123,70 @@ export default function Login_register() {
         })
     }
 
+    //Hàm đăng nhập
+    const handleSubmitLogin = (e: React.FormEvent) => {
+        let valid = true;
+        e.preventDefault();
+        if (!account.email) {
+            setErrorAccount((prevErr) => ({
+                ...prevErr,
+                email: "Vui lòng nhập email"
+            }))
+            valid = false;
+        } else {
+            setErrorAccount((prevErr) => ({
+                ...prevErr,
+                email: ""
+            }))
+        }
+
+        if (!account.password) {
+            setErrorAccount((prevErr) => ({
+                ...prevErr,
+                password: "Vui lòng nhập mật khẩu"
+            }))
+            valid = false
+        } else {
+            setErrorAccount((prevErr) => ({
+                ...prevErr,
+                password: ""
+            }))
+        }
+
+        if (valid && userState.length > 0) {
+            const findUser = userState.find((user: any) => user.email === account.email && user.password === account.password);
+            if (findUser) {
+                localStorage.setItem("account", JSON.stringify(findUser))
+                alert("Đăng nhập thành công");
+                navigate("/")
+            } else {
+                setErrorAccount((prevErr) => ({
+                    ...prevErr,
+                    password: "Tài khoản hoặc mật khẩu không đúng"
+                }))
+                valid = false;
+            }
+        }
+    }
+
+    useEffect(() => {
+        dispatch(getAllUser())
+    }, [])
+
+    const handleLogin = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = e.target;
+        setAccount({
+            ...account,
+            [name]: value
+        })
+    }
+
     return (
         <div className="main" style={{ backgroundColor: "pink", margin: "0 auto", marginTop: 40 }}>
-            <input type="checkbox" id="chk" aria-hidden="true" />
+            <input type="checkbox" id="chk" aria-hidden="true" checked={isLogin} />
             <div className="signup">
                 <form onSubmit={handleSubmit}>
-                    <label htmlFor="chk" aria-hidden="true">
+                    <label htmlFor="chk" aria-hidden="true" onClick={() => setIsLogin(false)} >
                         Đăng kí
                     </label>
                     <input style={{ backgroundColor: "white" }} type="text" name="userName" placeholder="Tên" onChange={handleChange} value={inputValue.userName} />
@@ -138,17 +206,25 @@ export default function Login_register() {
                         error.confirmPassword && <span style={{ color: "red", fontSize: 12, margin: 75 }}>{error.confirmPassword}</span>
                     }
 
-                    <button>Đăng kí</button>
+                    <button type="submit">Đăng kí</button>
                 </form>
             </div>
             <div style={{ backgroundColor: "white" }} className="login">
-                <form>
-                    <label style={{ color: "pink", }} htmlFor="chk" aria-hidden="true">
+                <form onSubmit={handleSubmitLogin}>
+                    <label style={{ color: "pink", }} htmlFor="chk" aria-hidden="true"
+                        onClick={() => setIsLogin(true)}
+                    >
                         Đăng nhập
                     </label>
-                    <input style={{ backgroundColor: "pink" }} type="email" name="email" placeholder="Gmail" />
-                    <input style={{ backgroundColor: "pink" }} type="password" name="pswd" placeholder="Mật khẩu" />
-                    <button>Đăng nhập</button>
+                    <input style={{ backgroundColor: "pink" }} type="text" name="email" placeholder="Gmail" onChange={handleLogin} value={account.email} /> <br />
+                    {
+                        errorAccount.email && <span style={{ color: "red", fontSize: 12, margin: 75 }}>{errorAccount.email}</span>
+                    }
+                    <input style={{ backgroundColor: "pink" }} type="password" name="password" placeholder="Mật khẩu" onChange={handleLogin} value={account.password} /> <br />
+                    {
+                        errorAccount.password && <span style={{ color: "red", fontSize: 12, margin: 75 }}>{errorAccount.password}</span>
+                    }
+                    <button type="submit">Đăng nhập</button>
                 </form>
             </div>
         </div>
