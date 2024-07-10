@@ -21,7 +21,7 @@ export default function Shop() {
             <ul className="side-menu top">
                 <li className="active">
                     <a href="#">
-                        <i className="bx bxs-dashboard" />
+
                         <a href="/admin"><i className="bx bxs-dashboard" /><p className="text">Bảng điều khiển</p></a>
                     </a>
                 </li>
@@ -160,15 +160,18 @@ export default function Shop() {
                             </thead>
                             <tbody>
                                 {flower.map((item: any) => {
-                                    return <tr className='item-flower' key={item.id}  >
-                                        <td>{item.name}</td>
-                                        <td
-                                            style={{ textAlign: "start" }}
-                                        ><b className='cl-price'>{item.price.toLocaleString('it-IT', { style: 'currency', currency: 'VND' })}</b></td>
-                                        <td style={{ textAlign: "start" }}>{item.expression}</td>
-                                        <td style={{ textAlign: "start" }}><img src={item.img} alt="" /></td>
-
-                                    </tr>
+                                    
+                                    return (
+                                        
+                                        <tr className='item-flower' key={item.id}  > 
+                                            <td>{item.name}</td>
+                                            <td
+                                                style={{ textAlign: "start" }}><b className='cl-price'>{item.price.toLocaleString('it-IT', { style: 'currency', currency: 'VND' })}</b>
+                                            </td>
+                                            <td style={{ textAlign: "start" }}>{item.expression}</td>
+                                            <td style={{ textAlign: "start" }}><img src={item.img} alt="" /></td>
+                                        </tr>
+                                    )
                                 })}
                             </tbody>
                         </table>

@@ -23,6 +23,12 @@ export const addUser: any = createAsyncThunk(
     }
 )
 
+// tìm kiếm user
+export const searchUser:any=createAsyncThunk("users/searchUser", async(search:string)=>{
+    const response = await axios.get(`http://localhost:8080/users?userName_like=${search}`);
+    return response.data
+})
+
 const userReducer = createSlice({
     name: "user",
     initialState: {

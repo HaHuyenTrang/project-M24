@@ -58,10 +58,13 @@ export default function Home() {
       </div>
 
       <div className='lg-su'>
+        <br />
         {
           account ? <>
-            <p>{account.userName}</p>
-            <a href="/login" onClick={handleLogout}><button className='login-sigup'>Đăng xuất</button></a>
+            <p style={{ display: "flex", justifyContent: "center", alignItems: "center" }}><span className="material-symbols-outlined">
+              account_circle
+            </span>{account.userName}</p>
+            <a href="/" onClick={handleLogout}><button className='login-sigup'>Đăng xuất</button></a>
           </> : <>
             <a href="/login"><button className='login-sigup'>Đăng nhập/ Đăng kí</button></a>
           </>
