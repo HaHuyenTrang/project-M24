@@ -180,3 +180,12 @@ h2{
     display: flex;
     
 } */
+
+
+.home-detail{
+    color: white;
+    
+}
+.home-detail:hover{
+    color:palevioletred;
+}

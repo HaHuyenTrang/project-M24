@@ -71,6 +71,7 @@ export default function Admin1() {
             </a>
           </li>
         </ul>
+
         <ul className="side-menu">
           <li>
             <a href="#">

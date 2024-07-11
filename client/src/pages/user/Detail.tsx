@@ -45,41 +45,70 @@ export default function Detail() {
 
             </div>
 
-            
+
             <div className='info'>
-                <b>Trang chủ</b>
+               <a href="/"> <b className='home-detail'>Trang chủ</b></a>
                 <b>Tất cả sản phẩm</b>
                 <b>Giới thiệu cửa hàng</b>
                 <b>Liên hệ</b>
             </div>
             <br />
             <br />
-           
-            <div className='render' style={{display:"flex"}} >
-                <ul className='item-flower' key={product.id} style={{width:"800px",height:"600px"}} >
-                    <li className='img-prd' >< img src={product.img} style={{width:"600px",height:"400px"}} alt="" /></li>
+
+            <div className='render' style={{ display: "flex" }} >
+                <ul className='item-flower' key={product.id} style={{ width: "800px", height: "550px",padding:"40px" }} >
+                    <li className='img-prd' >< img src={product.img} style={{ width: "600px", height: "400px" }} alt="" /></li>
                     {/* <li>{index+1}</li> */}
-                    <li><b style={{fontSize:"30px"}}>{product.name}</b></li>
-                    <li >
-                        <b style={{fontSize:"25px"}} className='cl-price'>{product.price.toLocaleString('it-IT', { style: 'currency', currency: 'VND' })}</b>
+                    <br />
+                    <br />
+                    <li><b style={{ fontSize: "30px" }}>{product.name}</b></li>
+                    
+                </ul>
+                <ul className='item-flower' style={{ fontSize: "15px",width: "800px", height: "550px", padding:"30px", paddingTop:"80px"}}>
+                    <h3 >Mô tả</h3>
+                    Hoa là món quà quý giá mà thiên nhiên ban tặng cho con người. Ngoài việc làm đẹp cho cuộc sống, mỗi loài hoa còn mang trong mình ý nghĩa sâu sắc, giúp con người truyền đạt những thông điệp trong tình yêu và cuộc sống
+                    <br />
+                    <br />
+                    <br />
+                    Các loài hoa mang theo mình ý nghĩa sâu sắc, chính là một ngôn ngữ tuyệt vời mà chúng muốn gửi đến cuộc sống. Mỗi bông hoa đều như những nét vẽ tuyệt đẹp, tô thêm màu sắc cho hành trình sống của chúng ta.
+                    <br />
+                    <br />
+                    <li style={{ display: "flex", gap: "29px", color:"#FF69B4"  }}>
+                        <li style={{ display: "flex", alignItems: "center" }}> <span className="material-symbols-outlined">
+                            local_shipping
+                        </span>Free Ship</li>
+                        <li style={{ display: "flex", alignItems: "center" }}><span className="material-symbols-outlined">
+                            paid
+                        </span>Hoàn trả</li>
+                        <li style={{ display: "flex", alignItems: "center" }} ><span className="material-symbols-outlined">
+                            sell
+                        </span>Deal hời, giá rẻ</li>
+                        <li><span className="material-symbols-outlined">
+                            support_agent
+                        </span>Hỗ trợ </li>
+
                     </li>
+                    <li>
+                        <br />
+                    <ul  key={product.id}  >
+                        <br />
+                    
+                    <li >
+                        <b style={{ fontSize: "25px" }} className='cl-price'>{product.price.toLocaleString('it-IT', { style: 'currency', currency: 'VND' })}</b>
+                    </li>
+                    <br />
                     <li >Hình thức: {product.expression}</li>
-                    <div className='button-buy' style={{display:"flex", justifyContent:"center"}}>
+                    <div className='button-buy' style={{ display: "flex", justifyContent: "center" }}>
                         {/* <li><button onClick={handleDetail}>Xem chi tiết</button></li> */}
                         <li><button >Mua hoa</button></li>
                     </div>
                     {/* <li>{product.describe}</li> */}
                 </ul>
-                <ul style={{fontSize:"20px", backgroundColor:""}}>
-                    <h3 >Mô tả</h3>
-                Hoa là món quà quý giá mà thiên nhiên ban tặng cho con người. Ngoài việc làm đẹp cho cuộc sống, mỗi loài hoa còn mang trong mình ý nghĩa sâu sắc, giúp con người truyền đạt những thông điệp trong tình yêu và cuộc sống
-                <br />
-                <br />
-                Các loài hoa mang theo mình ý nghĩa sâu sắc, chính là một ngôn ngữ tuyệt vời mà chúng muốn gửi đến cuộc sống. Mỗi bông hoa đều như những nét vẽ tuyệt đẹp, tô thêm màu sắc cho hành trình sống của chúng ta. 
-                
-                
+
+                    </li>
+
                 </ul>
-                
+
 
             </div>
             <br />
@@ -131,6 +160,6 @@ export default function Detail() {
                     <p><i className="fa-brands fa-instagram"></i>   Instagram</p>
                 </div>
             </div>
-        </div>
+        </div >
     )
 }
