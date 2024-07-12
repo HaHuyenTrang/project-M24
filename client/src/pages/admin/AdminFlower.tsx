@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import './admin.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllUser, searchUser } from '../../store/reducer/userReducer';
+import { getAllUser, searchUser, statusUser } from '../../store/reducer/userReducer';
 import { Users } from '../../interface/user';
 
 export default function Admin1() {
   const users = useSelector((state: any) => state.userReducer.user);
+  const [selectedId, setselectedId] = useState<number | null>(null)
   const dispatch = useDispatch();
 
   const [search, setSearch] = useState<string>("");
@@ -31,6 +32,21 @@ export default function Admin1() {
     }
   };
 
+  const handleBlock = (id: number) => {
+    setselectedId(id)
+    dispatch(statusUser({ id, status: 1 }))
+    dispatch(getAllUser())
+    setselectedId(null)
+  }
+
+  const handleUnBlock = (id: number) => {
+    setselectedId(id)
+    dispatch(statusUser({ id, status: 0 }))
+    dispatch(getAllUser())
+    setselectedId(null)
+
+  }
+
   return (
     <>
       {/* SIDEBAR */}
@@ -53,9 +69,9 @@ export default function Admin1() {
             </a>
           </li>
           <li>
-            <a href="#">
+            <a href="/category">
               <i className="bx bxs-doughnut-chart" />
-              <span className="text">Analytics</span>
+              <span className="text">Danh mục </span>
             </a>
           </li>
           <li>
@@ -175,14 +191,15 @@ export default function Admin1() {
                   </tr>
                 </thead>
                 <tbody>
-                  {filteredUsers.map((item: any) => (
-                    <tr key={item.id}>
-                      <td>{item.id}</td>
+                  {filteredUsers.map((item: Users) => (
+                    <tr key={item.id} style={{ opacity: item.status === 1 ? 0.5 : 1 }}>
+                      <td style={{ marginTop: "80%" }}>{item.id}</td>
                       <td>{item.userName}</td>
                       <td>{item.email}</td>
                       <td>
-                        <button>Khóa</button>
-                        <span><button>Mở khóa</button></span>
+                        {
+                          item.status === 1 ? <button onClick={() => handleUnBlock(item.id)}>Mở khóa</button> : <button onClick={() => handleBlock(item.id)}>Khóa</button>
+                        }
                       </td>
                     </tr>
                   ))}

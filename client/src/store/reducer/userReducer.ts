@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Users } from "../../interface/user";
 import axios from "axios";
 
@@ -29,6 +29,12 @@ export const searchUser:any=createAsyncThunk("users/searchUser", async(search:st
     return response.data
 })
 
+// API cập nhật trạng thái user
+export const statusUser: any=createAsyncThunk("users/statusUser", async(data:any)=>{
+    const response= await axios.patch(` http://localhost:8080/users/${data.id}`,data)
+    return response.data
+})
+
 const userReducer = createSlice({
     name: "user",
     initialState: {
@@ -42,6 +48,12 @@ const userReducer = createSlice({
         })
         .addCase(addUser.fulfilled, (state, action) => {
             state.user.push(action.payload)
+        })
+        .addCase(statusUser.fulfilled,(state, action: PayloadAction<{ id: number, status: number }>)=>{
+            const findUser = state.user.findIndex((user) => user.id === action.payload.id);
+            if(findUser !== -1){
+                state.user[findUser].status = action.payload.status
+            }
         })
     }
 })

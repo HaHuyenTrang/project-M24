@@ -6,6 +6,11 @@ export const getAllProduct:any = createAsyncThunk("products/getAllProduct",async
     return response.data
 })
 
+export const deleteProduct: any = createAsyncThunk("products/deleteProduct", async(id:number)=>{
+    let response = await axios.delete(`http://localhost:8080/products/${id}`)
+    return response.data
+})
+
 const productReducer=createSlice({
     name:"productReducer",
     initialState:{
@@ -18,6 +23,12 @@ const productReducer=createSlice({
         builder
         .addCase(getAllProduct.fulfilled,(state,action)=>{
             state.list=action.payload
+        })
+        .addCase(deleteProduct.fulfilled,(state,action)=>{
+            state.list=state.list.filter((product:any)=>{
+                return product.id!==action.payload.id
+            })
+            
         })
     }
 })

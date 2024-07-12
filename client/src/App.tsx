@@ -6,6 +6,7 @@ import { Route, Routes } from 'react-router-dom'
 import Login_register from './pages/user/Login_register' 
 import Shop from './pages/admin/Shop' 
 import Detail from './pages/user/Detail' 
+import Category from './pages/admin/Category'
 
 export default function App() {
   return (
@@ -16,6 +17,7 @@ export default function App() {
       <Route path='/login' element={<Login_register></Login_register>}></Route>
       <Route path='/shop' element={<Shop></Shop>}></Route>
       <Route path='/detail/:id' element={<Detail></Detail>}></Route>
+      <Route path='/category' element={<Category></Category>}></Route>
     </Routes>
 
   )

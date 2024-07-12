@@ -1,25 +1,18 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import './admin.css'
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteProduct, getAllProduct } from '../../store/reducer/productReducer';
+// import { getAllProduct } from '../../store/reducer/productReducer';
+import { getCategory } from '../../store/reducer/categoryReducer';
 // import './admin'
 
-export default function Shop() {
-    const flower: any = useSelector(((state: any) => state.productReducer.list))
+export default function Category() {
+    const categoryProduct: any = useSelector(((state: any) => state.categoryReducer.category));
+    console.log(categoryProduct)
     const disPatch = useDispatch();
     useEffect(() => {
-        disPatch(getAllProduct())
+        disPatch(getCategory())
     }, [])
-    
 
-    const handleDelete=(id:number)=>{
-        let confirmDelete= window.confirm("bạn có muốn xóa sản phẩm này???")
-        if(confirmDelete){
-            disPatch(deleteProduct(id))
-            console.log(id);
-            disPatch(getAllProduct())   
-        }
-    }
     return (<>
         {/* SIDEBAR */}
         <section id="sidebar">
@@ -29,19 +22,19 @@ export default function Shop() {
             </a>
             <ul className="side-menu top">
                 <li className="active">
-                    <a href="#">
+                    <a href="/admin">
 
                         <a href="/admin"><i className="bx bxs-dashboard" /><p className="text">Bảng điều khiển</p></a>
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="/shop">
                         <i className="bx bxs-shopping-bag-alt" />
                         <span className="text">Cửa hàng</span>
                     </a>
                 </li>
                 <li>
-                    <a href="/category">
+                    <a href="#">
                         <i className="bx bxs-doughnut-chart" />
                         <span className="text">Danh mục</span>
                     </a>
@@ -108,10 +101,10 @@ export default function Shop() {
             <main>
                 <div className="head-title">
                     <div className="left">
-                        <h1>Cửa hàng của bạn</h1>
+                        <h1>Danh mục</h1>
                         <ul className="breadcrumb">
                             <li>
-                                <a href="#">Cửa hàng</a>
+                                <a href="#">Danh mục</a>
                             </li>
                             <li>
                                 <i className="bx bx-chevron-right" />
@@ -154,35 +147,29 @@ export default function Shop() {
                 <div className="table-data">
                     <div className="order">
                         <div className="head">
-                            <h3>Sản phẩm</h3>
-                            <button style={{width:"200px", margin:0}}>Thêm sản phẩm</button>
+                            <h3>Danh mục</h3>
+                            <i className="bx bx-search" />
                             <i className="bx bx-filter" />
                         </div>
                         <table>
                             <thead>
                                 <tr>
                                     <th>Tên sản phẩm</th>
-                                    <th>Giá trị sản phẩm</th>
-                                    <th>Hình thức</th>
-                                    <th>Ảnh</th>
+                                    <th>ID sản phẩm</th>
                                     <th>Hành động</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {flower.map((item: any) => {
-                                    
+                                {categoryProduct.map((item: any) => {
+
                                     return (
-                                        
-                                        <tr className='item-flower' key={item.id}  > 
-                                            <td style={{marginTop:"22%"}}>{item.name}</td>
-                                            <td
-                                                style={{ textAlign: "start" }}><b className='cl-price'>{item.price.toLocaleString('it-IT', { style: 'currency', currency: 'VND' })}</b>
-                                            </td>
-                                            <td style={{ textAlign: "start" }}>{item.expression}</td>
-                                            <td style={{ textAlign: "start" }}><img style={{ width:"50px", height:"50px"}} src={item.img} alt="" /></td>
+
+                                        <tr className='item-flower' key={item.id}  >
+                                            <td style={{ marginTop: "17%" }}>{item.name}</td>
+                                            <td style={{ textAlign: "start" }}>{item.id}</td>
                                             <td>
                                                 <button>Sửa</button>
-                                                <button onClick={()=>handleDelete(item.id)}>Xóa</button>
+                                                <button>Xóa</button>
                                             </td>
                                         </tr>
                                     )
