@@ -17,3 +17,24 @@ export interface Category{
     name: string,
 }
 
+export interface Products{
+    id: number,
+    name: string,
+    img: string,
+    describe: string,
+    expression: string,
+    price: number
+}
+
+export interface AddProduct{
+    name: string,
+    img: string,
+    describe: string,
+    expression: string,
+    price: number
+}
+
+export interface Admin{
+    email: string, 
+    password: string
+}

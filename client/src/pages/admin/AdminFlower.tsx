@@ -3,10 +3,12 @@ import './admin.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllUser, searchUser, statusUser } from '../../store/reducer/userReducer';
 import { Users } from '../../interface/user';
+import { useNavigate } from 'react-router-dom';
 
 export default function Admin1() {
   const users = useSelector((state: any) => state.userReducer.user);
   const [selectedId, setselectedId] = useState<number | null>(null)
+  const navigate = useNavigate()
   const dispatch = useDispatch();
 
   const [search, setSearch] = useState<string>("");
@@ -45,6 +47,13 @@ export default function Admin1() {
     dispatch(getAllUser())
     setselectedId(null)
 
+  }
+
+  const handleLogout = () => {
+    const confirmLogout = confirm("Bạn có chắc chắn đăng xuất không?");
+    if (confirmLogout) {
+      navigate("/loginAdmin")
+    }
   }
 
   return (
@@ -96,7 +105,7 @@ export default function Admin1() {
             </a>
           </li>
           <li>
-            <a href="#" className="logout">
+            <a href="#" className="logout" onClick={handleLogout}>
               <i className="bx bxs-log-out-circle" />
               <span className="text">Đăng xuất</span>
             </a>

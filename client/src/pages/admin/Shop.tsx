@@ -1,24 +1,66 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import './admin.css'
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteProduct, getAllProduct } from '../../store/reducer/productReducer';
+import { deleteProduct, getAllProduct, updateProduct } from '../../store/reducer/productReducer';
+import { Products } from '../../interface/user';
+import { useNavigate } from 'react-router-dom';
+// import "./FormEdit.css"
 // import './admin'
 
 export default function Shop() {
+    const navigate = useNavigate()
+    const [showFormEdit, setShowFormEdit] = useState<boolean>(false)
     const flower: any = useSelector(((state: any) => state.productReducer.list))
+    console.log(flower)
+    const [productEdit, setProductEdit] = useState<Products | null>(null)
     const disPatch = useDispatch();
     useEffect(() => {
         disPatch(getAllProduct())
     }, [])
-    
 
-    const handleDelete=(id:number)=>{
-        let confirmDelete= window.confirm("bạn có muốn xóa sản phẩm này???")
-        if(confirmDelete){
+    // hàm xóa sản phẩm
+    const handleDelete = (id: number) => {
+        let confirmDelete = window.confirm("bạn có muốn xóa sản phẩm này???")
+        if (confirmDelete) {
             disPatch(deleteProduct(id))
             console.log(id);
-            disPatch(getAllProduct())   
+            disPatch(getAllProduct())
         }
+    }
+    //  hàm sửa thông tin sản phẩm
+    const handleShowEdit = (product: Products) => {
+        setProductEdit(product)
+        setShowFormEdit(true);
+
+    }
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        if (productEdit) {
+            await disPatch(updateProduct({
+                id: productEdit.id,
+                name: productEdit.name,
+                price: productEdit.price,
+                expression: productEdit.expression,
+                describe: parseInt(productEdit.describe),
+                img: productEdit.img
+            }))
+            setShowFormEdit(false)
+            await disPatch(getAllProduct())
+        }
+    }
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (productEdit) {
+            setProductEdit({
+                ...productEdit,
+                [e.target.name]: e.target.value
+            })
+        }
+    }
+
+    const handleClick = () => {
+        navigate("/add")
     }
     return (<>
         {/* SIDEBAR */}
@@ -155,7 +197,7 @@ export default function Shop() {
                     <div className="order">
                         <div className="head">
                             <h3>Sản phẩm</h3>
-                            <button style={{width:"200px", margin:0}}>Thêm sản phẩm</button>
+                            <button style={{ width: "200px", margin: 0 }} onClick={handleClick}>Thêm sản phẩm</button>
                             <i className="bx bx-filter" />
                         </div>
                         <table>
@@ -170,19 +212,19 @@ export default function Shop() {
                             </thead>
                             <tbody>
                                 {flower.map((item: any) => {
-                                    
+
                                     return (
-                                        
-                                        <tr className='item-flower' key={item.id}  > 
-                                            <td style={{marginTop:"22%"}}>{item.name}</td>
+
+                                        <tr className='item-flower' key={item.id}  >
+                                            <td style={{ marginTop: "22%" }}>{item.name}</td>
                                             <td
                                                 style={{ textAlign: "start" }}><b className='cl-price'>{item.price.toLocaleString('it-IT', { style: 'currency', currency: 'VND' })}</b>
                                             </td>
                                             <td style={{ textAlign: "start" }}>{item.expression}</td>
-                                            <td style={{ textAlign: "start" }}><img style={{ width:"50px", height:"50px"}} src={item.img} alt="" /></td>
+                                            <td style={{ textAlign: "start" }}><img style={{ width: "50px", height: "50px" }} src={item.img} alt="" /></td>
                                             <td>
-                                                <button>Sửa</button>
-                                                <button onClick={()=>handleDelete(item.id)}>Xóa</button>
+                                                <button onClick={() => handleShowEdit(item)}>Sửa</button>
+                                                <button onClick={() => handleDelete(item.id)}>Xóa</button>
                                             </td>
                                         </tr>
                                     )
@@ -233,6 +275,26 @@ export default function Shop() {
             </main>
             {/* MAIN */}
         </section>
+        {
+            showFormEdit && <div className="modal" style={{ paddingLeft: 200 }}>
+                <div className="modal-content" onClick={e => e.stopPropagation()}>
+                    <span className="close-btn" >&times;</span>
+                    <form id="editProductForm" onSubmit={handleSubmit}>
+                        <h2 >  Sửa </h2>
+                        <label htmlFor="productName">Tên:</label>
+                        <input type="text" id="productName" name="name" required onChange={handleChange} value={productEdit?.name} />
+
+                        <label htmlFor="productPrice">Giá:</label>
+                        <input type="number" id="productPrice" name="price" required onChange={handleChange} value={productEdit?.price} />
+
+                        <label htmlFor="productDescription">Ảnh:</label>
+                        <input id="productDescription" name="img" type='text' required onChange={handleChange} value={productEdit?.img}></input>
+
+                        <button type="submit">Lưu</button>
+                    </form>
+                </div>
+            </div>
+        }
         {/* CONTENT */}
     </>)
 }

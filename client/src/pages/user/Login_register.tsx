@@ -26,6 +26,7 @@ export default function Login_register() {
         email: "",
         password: "",
         confirmPassword: "",
+        status: 0
     })
 
     // Hiển thị lỗi khi chưa có dữ liệu
@@ -53,6 +54,7 @@ export default function Login_register() {
             email: "",
             password: "",
             confirmPassword: "",
+            status: 0
         })
     }
 
@@ -156,9 +158,14 @@ export default function Login_register() {
         if (valid && userState.length > 0) {
             const findUser = userState.find((user: any) => user.email === account.email && user.password === account.password);
             if (findUser) {
-                localStorage.setItem("account", JSON.stringify(findUser))
-                alert("Đăng nhập thành công");
-                navigate("/")
+                if (findUser.status === 1) {
+                    alert("Tài khoản đã bị chặn!")
+                } else {
+                    localStorage.setItem("account", JSON.stringify(findUser))
+                    alert("Đăng nhập thành công");
+                    navigate("/")
+                }
+
             } else {
                 setErrorAccount((prevErr) => ({
                     ...prevErr,
