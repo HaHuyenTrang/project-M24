@@ -12,7 +12,7 @@
       "id": 2,
       "name": "Hoa Hồng",
       "price": 300000,
-      "expression": "bó",
+      "expression": "bông",
       "describe": "tượng trưng cho vẻ đẹp mĩ miều",
       "img": "https://hoatuoi360.vn/uploads/file/hinh-anh-hoa-hong-dep-1.jpg"
     },
@@ -72,7 +72,8 @@
       "email": "trang2005@gmail.com",
       "password": "trang2005",
       "confirmPassword": "trang2005",
-      "status": 1
+      "status": 0,
+      "cart": []
     },
     {
       "id": 2,
@@ -80,7 +81,8 @@
       "email": "quynh2005@gmail.com",
       "password": "quynh2005",
       "confirmPassword": "trang2005",
-      "status": 0
+      "status": 1,
+      "cart": []
     },
     {
       "userName": "Trang",
@@ -107,6 +109,14 @@
     {
       "id": 2,
       "name": "Hoa theo bông"
+    },
+    {
+      "name": "Hồng trắng",
+      "price": "350000",
+      "expression": "bó",
+      "describe": "mau sac ruc ro",
+      "image": "https://th.bing.com/th/id/R.302fcf73780826731a297895211fbc2a?rik=Wk6EjegWoTOw%2bQ&pid=ImgRaw&r=0",
+      "id": 5
     }
   ]
 }

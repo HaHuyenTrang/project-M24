@@ -5,13 +5,11 @@ import "./home.css";
 import { useDispatch, useSelector } from 'react-redux';
 import { addCarts, getAllProduct, setCart } from '../../store/reducer/productReducer';
 import { useNavigate } from 'react-router-dom';
-import { getAllUser } from '../../store/reducer/userReducer';
 
-export default function Home() {
+export default function ClassifyProduct() {
   const [account, setAccount] = useState(JSON.parse(localStorage.getItem("account") || "null"));
   const flower: any = useSelector(((state: any) => state.productReducer.list));
   const cart = useSelector((state: any) => state.productReducer.cart);
-  const users = useSelector((state: any) => state.userReducer.user)
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -19,7 +17,6 @@ export default function Home() {
     dispatch(getAllProduct());
     // Lấy giỏ hàng từ localStorage và set vào Redux state
     dispatch(setCart(account.cart));
-    dispatch(getAllUser())
   }, [dispatch]);
 
   const handleDetail = (id: number) => {
@@ -38,16 +35,8 @@ export default function Home() {
 
   const handleAddToCart = (productId: number) => {
     if (account) {
-      const findUser = users.find((user: any) => user.id === account.id);
-      if (findUser) {
-        if (findUser.status === 1) {
-          alert("tài khoản đã bị chặn")
-        } else {
-          dispatch(addCarts(productId));
-          alert("Thêm sản phẩm vào giỏ hàng thành công!");
-        }
-      }
-
+      dispatch(addCarts(productId));
+      alert("Thêm sản phẩm vào giỏ hàng thành công!");
     } else {
       // Xử lý khi người dùng chưa đăng nhập
       alert("Bạn cần đăng nhập để thêm sản phẩm vào giỏ hàng!");
@@ -118,10 +107,12 @@ export default function Home() {
       <br />
 
       <div className='info'>
-        <b>Trang chủ</b>
-        <b><a href="/classify" style={{ color: "white" }}>Tất cả sản phẩm</a></b>
+        <b><a href="/" style={{color:"white"}}>Trang chủ</a></b>
+        <b><a href="/bo" style={{color:"white"}}>Hoa theo bó</a></b>
+        <b><a href="/bong" style={{color:"white"}}>Hoa theo bông</a></b>
+        {/* <b>Tất cả sản phẩm</b>
         <b><a href="#" style={{ color: "white" }} onClick={scrollToWeFlower}>Giới thiệu cửa hàng</a></b>
-        <b><a href="#" style={{ color: "white" }} onClick={scrollToTrangFlower}>Liên hệ</a></b>
+        <b><a href="#" style={{ color: "white" }} onClick={scrollToTrangFlower}>Liên hệ</a></b> */}
       </div>
 
       <br />
@@ -200,3 +191,4 @@ export default function Home() {
     </div>
   );
 }
+

@@ -10,6 +10,20 @@ export const getCategory:any=createAsyncThunk("category/getCategory", async()=>{
     return response.data
 })
 
+// lấy category
+export const addCategory:any = createAsyncThunk("category/addCategory",
+    async (category)=>{
+        const response = await axios.post("http://localhost:8080/category", category)
+        return response.data
+    }
+)
+
+// xóa categor
+    export const deleteCategory:any = createAsyncThunk("category/deleteCategory", async(idCategory)=>{
+        const response = await axios.delete(`http://localhost:8080/category/${idCategory}`)
+        return idCategory
+    })
+
 const categoryReducer = createSlice({
     name:"category",
     initialState:{
@@ -23,6 +37,15 @@ const categoryReducer = createSlice({
         .addCase(getCategory.fulfilled,(state,action)=>{
             state.category=action.payload
         })
+        .addCase(addCategory.fulfilled, (state,action)=>{
+            state.category.push(action.payload)
+        })
+        .addCase(deleteCategory.fulfilled,(state, action)=>{
+            state.category=state.category.filter((category:any)=>{
+                return category.id!==action.payload.id
+            })
+        })
+
     }
 })
 

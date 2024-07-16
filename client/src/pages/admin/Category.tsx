@@ -1,17 +1,76 @@
-import { useEffect } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import './admin.css'
+import './addCategory.css'
 import { useDispatch, useSelector } from 'react-redux';
 // import { getAllProduct } from '../../store/reducer/productReducer';
-import { getCategory } from '../../store/reducer/categoryReducer';
+import { addCategory, deleteCategory, getCategory } from '../../store/reducer/categoryReducer';
 // import './admin'
 
 export default function Category() {
+    const [getValueInputName, setGetvalueInputName] = useState<string>("")
+    const [getValueInputPrice, setGetvalueInputPrice] = useState<string>("")
+    const [getValueInputExpression, setGetvalueInputExpression] = useState<string>("")
+    const [getValueInputDescribe, setGetvalueInputDescribe] = useState<string>("")
+    const [getValueInputImg, setGetvalueInputImg] = useState<string>("")
+
+
+    const handleGetvalueName = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setGetvalueInputName(e.target.value)
+    }
+
+    const handleGetvaluePrice = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setGetvalueInputPrice(e.target.value)
+    }
+
+    const handleGetvalueDescribe = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setGetvalueInputDescribe(e.target.value)
+    }
+
+    const handleGetvalueImg = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setGetvalueInputImg(e.target.value)
+    }
+
+    const handleGetvalueExpression = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setGetvalueInputExpression(e.target.value)
+    }
+
+    const [isOpen, setIsOpen] = useState(false);
+
     const categoryProduct: any = useSelector(((state: any) => state.categoryReducer.category));
+
     console.log(categoryProduct)
+
     const disPatch = useDispatch();
+
+
+
+    const handleAddCategory = () => {
+        const newCategory = {
+            name: getValueInputName,
+            price: getValueInputPrice,
+            expression: getValueInputExpression,
+            describe: getValueInputDescribe,
+            image: getValueInputImg
+        }
+        disPatch(addCategory(newCategory))
+    }
+    const handleDeleteCategory = (id: number) => {
+        let confirmDelete = window.confirm("bạn có chắc chắn muốn xóa???")
+        if (confirmDelete) {
+            disPatch(deleteCategory(id))
+            disPatch(getCategory())
+
+        }
+
+    }
+
     useEffect(() => {
         disPatch(getCategory())
+
     }, [])
+
+
+
 
     return (<>
         {/* SIDEBAR */}
@@ -24,7 +83,7 @@ export default function Category() {
                 <li className="active">
                     <a href="/admin">
 
-                        <a href="/admin"><i className="bx bxs-dashboard" /><p className="text">Bảng điều khiển</p></a>
+                        <a href="/admin"><i className="bx bxs-dashboard" /><p className="text">Người dùng</p></a>
                     </a>
                 </li>
                 <li>
@@ -148,7 +207,7 @@ export default function Category() {
                     <div className="order">
                         <div className="head">
                             <h3>Danh mục</h3>
-                            <i className="bx bx-search" />
+                            <button onClick={() => setIsOpen(true)} style={{ width: "200px", margin: 0 }}>Thêm</button>
                             <i className="bx bx-filter" />
                         </div>
                         <table>
@@ -169,7 +228,7 @@ export default function Category() {
                                             <td style={{ textAlign: "start" }}>{item.id}</td>
                                             <td>
                                                 <button>Sửa</button>
-                                                <button>Xóa</button>
+                                                <button onClick={() => handleDeleteCategory(item.id)}>Xóa</button>
                                             </td>
                                         </tr>
                                     )
@@ -221,6 +280,39 @@ export default function Category() {
             {/* MAIN */}
         </section>
         {/* CONTENT */}
+        {/* showForm */}
+        {isOpen && <div className='overley'>
+            <div className='Adminnn' style={{ display: "flex", alignItems: "center", height: "50px", marginTop: "240px", padding: "90px" }}>
+                <div className='border'>
+                    <h2>Thêm danh mục</h2>
+                    {/* <br /> */}
+                    <b>Tên: </b>
+                    <input onChange={handleGetvalueName} type="text" name="name" id="" placeholder='Nhập tên sản phẩm' />
+
+                    {/* <br /> */}
+                    <b>Giá:</b>
+                    <input onChange={handleGetvaluePrice} type="text" name="price" id="" placeholder="Nhập giá trị sản phẩm" />
+                    <b>Hình thức:</b>
+                    <input onChange={handleGetvalueExpression} type="text" name="expression" id="" placeholder="Bó/Bông" />
+
+                    {/* <br /> */}
+                    <b>Mô tả:</b>
+                    <input onChange={handleGetvalueDescribe} type="text" name="describe" id="" placeholder="Nhập mô tả" />
+
+                    {/* <br /> */}
+                    <b>Ảnh:</b>
+                    <input onChange={handleGetvalueImg} type="text" name="img" id="" placeholder="image" />
+
+                    <div style={{ display: "flex", gap: "10px" }}>
+                        <button onClick={handleAddCategory} >Thêm</button>
+                        <button onClick={() => setIsOpen(false)}>Đóng</button>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>}
+
     </>)
 }
 

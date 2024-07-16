@@ -57,7 +57,7 @@ img{
     color: pink;
 }
 .most{
-    /* color: pink; */
+    color: pink;
     display: flex;
     justify-content: center;
 }

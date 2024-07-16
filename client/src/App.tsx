@@ -9,6 +9,9 @@ import Detail from './pages/user/Detail'
 import Category from './pages/admin/Category'
 import FormAddProduct from './pages/admin/FormAddProduct'
 import LoginAdmin from './pages/admin/LoginAdmin'
+import ClassifyProduct from './pages/user/ClassifyProduct'
+import Bo from './pages/user/Bo'
+import Bong from './pages/user/Bong'
 
 export default function App() {
   return (
@@ -22,6 +25,9 @@ export default function App() {
       <Route path='/category' element={<Category></Category>}></Route>
       <Route path='/add' element={<FormAddProduct></FormAddProduct>}></Route>
       <Route path='/loginAdmin' element={<LoginAdmin />} />
+      <Route path='/classify' element={<ClassifyProduct />} />
+      <Route path='/bo' element={<Bo />} />
+      <Route path='/bong' element={<Bong />} />
     </Routes>
 
   )

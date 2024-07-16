@@ -73,7 +73,7 @@ export default function Shop() {
                 <li className="active">
                     <a href="#">
 
-                        <a href="/admin"><i className="bx bxs-dashboard" /><p className="text">Bảng điều khiển</p></a>
+                        <a href="/admin"><i className="bx bxs-dashboard" /><p className="text">Người dùng</p></a>
                     </a>
                 </li>
                 <li>

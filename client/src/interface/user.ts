@@ -5,6 +5,7 @@ export interface Users{
     password: string,
     confirmPassword: string,
     status: number,
+    cart: []
 }
 
 export interface Account{

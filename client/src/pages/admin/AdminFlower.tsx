@@ -30,17 +30,17 @@ export default function Admin1() {
       setFilteredUsers(users);
     } else {
       const result = await dispatch(searchUser(searchValue));
-      setFilteredUsers(result.payload); // Assuming searchUser action returns the filtered users in payload
+      setFilteredUsers(result.payload);
     }
   };
-
+  // hàm khóa user
   const handleBlock = (id: number) => {
     setselectedId(id)
     dispatch(statusUser({ id, status: 1 }))
     dispatch(getAllUser())
     setselectedId(null)
   }
-
+  // hàm mở khóa user
   const handleUnBlock = (id: number) => {
     setselectedId(id)
     dispatch(statusUser({ id, status: 0 }))
@@ -48,7 +48,7 @@ export default function Admin1() {
     setselectedId(null)
 
   }
-
+  // hàm đăng xuất admin
   const handleLogout = () => {
     const confirmLogout = confirm("Bạn có chắc chắn đăng xuất không?");
     if (confirmLogout) {
@@ -68,7 +68,7 @@ export default function Admin1() {
           <li className="active">
             <a href="/admin">
               <i className="bx bxs-dashboard" />
-              <p className="text">Bảng điều khiển</p>
+              <p className="text">Người dùng</p>
             </a>
           </li>
           <li>
@@ -142,10 +142,10 @@ export default function Admin1() {
         <main>
           <div className="head-title">
             <div className="left">
-              <h1>Bảng điều khiển</h1>
+              <h1>Người dùng</h1>
               <ul className="breadcrumb">
                 <li>
-                  <a href="#">Bảng điều khiển</a>
+                  <a href="#">Quản lí người dùng</a>
                 </li>
                 <li>
                   <i className="bx bx-chevron-right" />

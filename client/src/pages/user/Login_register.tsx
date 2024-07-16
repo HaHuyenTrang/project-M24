@@ -26,7 +26,8 @@ export default function Login_register() {
         email: "",
         password: "",
         confirmPassword: "",
-        status: 0
+        status: 0,
+        cart: []
     })
 
     // Hiển thị lỗi khi chưa có dữ liệu
@@ -54,7 +55,8 @@ export default function Login_register() {
             email: "",
             password: "",
             confirmPassword: "",
-            status: 0
+            status: 0,
+            cart: []
         })
     }
 
@@ -157,6 +159,7 @@ export default function Login_register() {
 
         if (valid && userState.length > 0) {
             const findUser = userState.find((user: any) => user.email === account.email && user.password === account.password);
+            console.log(findUser)
             if (findUser) {
                 if (findUser.status === 1) {
                     alert("Tài khoản đã bị chặn!")
